@@ -2,6 +2,7 @@ import './App.css';
 import { getFng } from './routes/fng'
 import { useEffect, useState } from 'react';
 import Gauge from './components/Gauge';
+import { Helmet } from 'react-helmet';
 
 const formatDate = timestamp => {
     const formattedDate = new Date(timestamp * 1000);
@@ -35,7 +36,7 @@ function App() {
                             date: formatDate(date?.timestamp),
                             ...date
                         }
-                    })
+                    }).sort((a, b) => b.timestamp - a.timestamp)
                 }) 
             } catch (error) {
                 console.error('ERROR => ', error);
@@ -46,7 +47,10 @@ function App() {
 
     return (
         <div className='App'>
-            <header className="App-header">
+            <Helmet>
+                <script async src={process.env.REACT_APP_GOOGLE_ADS_URL} crossorigin="anonymous"></script>
+            </Helmet>
+            <main className="App-main">
                 <h1>Fear and Greed Index Bitcoin</h1>
                 {state.fngNow?.value_classification ?? 'Not Available Right Now'}
                 <div style={{ width: '50vw' }}>
@@ -55,7 +59,7 @@ function App() {
                     />
                 </div>
                 <p>Last updated: {state.fngNow.date?.month}</p>
-                <ul>
+                <ul style={{ maxHeight: '20vh', overflow: 'scroll' }}>
                     {(state.fngHistorical || []).map(data => (
                         <li key={data.timestamp}>
                             <p>{data.date.day} {data.date.month} {data.date.year}</p>
@@ -64,7 +68,7 @@ function App() {
                         </li>
                     ))}
                 </ul>
-            </header>
+            </main>
         </div>
     );
 }
