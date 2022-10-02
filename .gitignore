@@ -30,6 +30,12 @@
 /node/.develop.env
 /node/.production.env
 
+
+# Elastic Beanstalk Files
+/node/.elasticbeanstalk/*
+/node/!.elasticbeanstalk/*.cfg.yml
+/node/!.elasticbeanstalk/*.global.yml
+
 /frontend/npm-debug.log*
 /frontend/yarn-debug.log*
 /frontend/yarn-error.log*
