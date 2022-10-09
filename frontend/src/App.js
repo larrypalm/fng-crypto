@@ -3,6 +3,11 @@ import { getFng } from './routes/fng'
 import { useEffect, useState } from 'react';
 import Gauge from './components/Gauge';
 import { Helmet } from 'react-helmet';
+import {
+    useLocation,
+} from 'react-router-dom';
+import * as gtag from './lib/gtag';
+import GoogleSiteVerification from './components/Gauge/GoogleSiteVerification';
 
 const formatDate = timestamp => {
     const formattedDate = new Date(timestamp * 1000);
@@ -16,6 +21,7 @@ const formatDate = timestamp => {
 }
 
 function App() {
+    const location = useLocation();
     const [state, setState] = useState({
         fngNow: {},
         fngHistorical: []
@@ -47,6 +53,7 @@ function App() {
 
     return (
         <div className='App'>
+            <GoogleSiteVerification />
             <Helmet>
                 <script async src={process.env.REACT_APP_GOOGLE_ADS_URL} crossorigin="anonymous"></script>
             </Helmet>
