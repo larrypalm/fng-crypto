@@ -65,17 +65,25 @@ function App() {
                         value={state.fngNow.value ?? 0}
                     />
                 </div>
-                <p>Last updated: {state.fngNow.date?.month}</p>
-                <ul style={{ maxHeight: '20vh', overflow: 'scroll' }}>
+                <p>Last updated: {state.fngNow.date?.month} {state.fngNow.date?.day} {state.fngNow.date?.year}</p>
+                Historical Values:
+                <ul className="historical-values">
                     {(state.fngHistorical || []).map(data => (
-                        <li key={data.timestamp}>
-                            <p>{data.date.day} {data.date.month} {data.date.year}</p>
+                        <li key={data.timestamp} className="historical-value">
+                            <p><strong>Date:</strong> {data.date.month} {data.date.day} {data.date.year}</p>
                             <br/>
-                            <span>{data.value} - {data.value_classification}</span>
+                            <span><strong>Index:</strong> {data.value} - {data.value_classification}</span>
                         </li>
                     ))}
                 </ul>
             </main>
+
+            <footer>
+                Source: <a href="https://alternative.me">alternative.me</a>
+                <br/>
+                <br/>
+                Each day <a href="https://alternative.me">alternative.me</a> gathers and analyzes emotions and sentiments from multiple sources and toghether it creates the Fear and Greed Index.
+            </footer>
         </div>
     );
 }
