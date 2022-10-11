@@ -7,7 +7,7 @@ import {
     useLocation,
 } from 'react-router-dom';
 import * as gtag from './lib/gtag';
-import GoogleSiteVerification from './components/Gauge/GoogleSiteVerification';
+import GoogleSiteVerification from './components/GoogleSiteVerification';
 
 const formatDate = timestamp => {
     const formattedDate = new Date(timestamp * 1000);
@@ -18,6 +18,23 @@ const formatDate = timestamp => {
         month: months[formattedDate.getMonth()] ?? '',
         year: formattedDate.getFullYear() ?? ''
     };
+}
+
+const formatCountdown = timestamp => {
+    // timestamp
+    const date = new Date(timestamp).getTime();
+    // get the current time
+    const now = new Date().getTime();
+    // calculate time between now and time until update
+    const distance = date - now;
+
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+
+    return {
+        hours: `${hours} hours`,
+        minutes: `${minutes} minutes`
+    }
 }
 
 function App() {
@@ -31,10 +48,11 @@ function App() {
         const fetchFearAndGreed = async () => {
             try {
                 const { data: { max, historical } } = await getFng();
-
+                // max means that its the highest timestamp
                 setState({ 
                     fngNow: {
                         date: formatDate(max?.timestamp),
+                        timeUntilUpdate: formatCountdown(max?.time_until_update),
                         ...max
                     },
                     fngHistorical: (historical || []).map(date => {
@@ -59,14 +77,16 @@ function App() {
             </Helmet>
             <main className="App-main">
                 <h1>Fear and Greed Index Bitcoin</h1>
-                {state.fngNow?.value_classification ?? 'Not Available Right Now'}
+                <p>{state.fngNow?.value_classification ?? 'Not Available Right Now'}</p>
                 <div style={{ width: '50vw' }}>
                     <Gauge
                         value={state.fngNow.value ?? 0}
                     />
                 </div>
                 <p>Last updated: {state.fngNow.date?.month} {state.fngNow.date?.day} {state.fngNow.date?.year}</p>
-                Historical Values:
+                <p>Next update: {state?.fngNow.timeUntilUpdate?.hours ?? '0'} {state?.fngNow.timeUntilUpdate?.minutes ?? '0'}</p>
+                <br/>
+                <p>Historical Values:</p>
                 <ul className="historical-values">
                     {(state.fngHistorical || []).map(data => (
                         <li key={data.timestamp} className="historical-value">
