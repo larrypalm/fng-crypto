@@ -2,6 +2,10 @@
   text-align: center;
 }
 
+body {
+  background-color: #282c34;
+}
+
 .App-main {
   background-color: #282c34;
   min-height: 100vh;
@@ -11,6 +15,7 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  margin-top: 64px;
 }
 
 .historical-values {
