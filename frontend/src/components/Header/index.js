@@ -26,7 +26,6 @@ const Header = () => {
         <Toolbar sx={{ p: { xs: '16px', sm: '0px 24px'} }}>
             <Grid container spacing={2}>
                 <Grid 
-                    className='lame'
                     item 
                     xs={12} 
                     sx={{ 

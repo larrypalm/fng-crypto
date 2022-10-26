@@ -9,10 +9,12 @@ import Home from './components/Home';
 import NotFound from './components/NotFound';
 import Footer from './components/Footer';
 import Header from './components/Header';
+import PageTitle from './components/PageTitle';
 
 function App() {
     return (
         <div className='App'>
+            <PageTitle />
             <GoogleSiteVerification />
             <Helmet>
                 <script async src={process.env.REACT_APP_GOOGLE_ADS_URL} crossorigin="anonymous"></script>
