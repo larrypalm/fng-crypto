@@ -1,9 +1,6 @@
 import Gauge from '../Gauge';
 import { getFng } from '../../routes/fng'
 import { useEffect, useState } from 'react';
-import {
-    useLocation,
-} from 'react-router-dom';
 
 const formatCountdown = timestamp => {
     // timestamp
@@ -34,7 +31,6 @@ const formatDate = timestamp => {
 }
 
 const Home = () => {
-    const location = useLocation();
     const [state, setState] = useState({
         fngNow: {},
         fngHistorical: []
@@ -67,7 +63,7 @@ const Home = () => {
     return (
         <>
             <h1>Fear and Greed Index Bitcoin</h1>
-            <p>{state.fngNow?.value_classification ?? 'Not Available Right Now'}</p>
+            <p>Current index: <span style={{ color: '#f2a900' }}>{state.fngNow?.value_classification ?? 'Not Available Right Now'}</span></p>
             <div style={{ width: '50vw' }}>
                 <Gauge
                     value={state.fngNow.value ?? 0}

@@ -15,7 +15,6 @@ body {
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-  margin-top: 64px;
 }
 
 .historical-values {
@@ -54,4 +53,12 @@ footer {
 
 footer a {
   color: #ccc;
+}
+
+.gauge-container {
+  margin-bottom: 48px;
+}
+
+.gauge-container > * {
+  overflow: visible;
 }

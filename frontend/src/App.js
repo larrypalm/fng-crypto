@@ -1,5 +1,4 @@
 import './App.css';
-import { Helmet } from 'react-helmet';
 import {
     Routes,
     Route,
@@ -11,6 +10,8 @@ import Footer from './components/Footer';
 import Header from './components/Header';
 import PageTitle from './components/PageTitle';
 import GoogleAnalytics from './components/GoogleAnalytics';
+import GoogleAdSense from './components/GoogleAdSense';
+import GoogleAdSenseHelmet from './components/GoogleAdSenseHelmet';
 
 function App() {
     return (
@@ -18,9 +19,18 @@ function App() {
             <PageTitle />
             <GoogleAnalytics />
             <GoogleSiteVerification />
-            <Helmet>
-                <script async src={process.env.REACT_APP_GOOGLE_ADS_URL} crossorigin="anonymous"></script>
-            </Helmet>
+            <GoogleAdSenseHelmet />
+            <GoogleAdSense 
+                className="adsbygoogle"
+                client="ca-pub-6850093525554389"
+                slot="3353523390"
+                layout=""
+                layoutKey=""
+                format="auto"
+                responsive="true"
+                pageLevelAds={false}
+                adTest
+            />
             <Header />
             <main className="App-main">
                 <Routes>
