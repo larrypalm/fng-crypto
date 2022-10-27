@@ -1,89 +1,49 @@
 import './App.css';
-import { getFng } from './routes/fng'
-import { useEffect, useState } from 'react';
-import Gauge from './components/Gauge';
-import { Helmet } from 'react-helmet';
 import {
-    useLocation,
+    Routes,
+    Route,
 } from 'react-router-dom';
-import * as gtag from './lib/gtag';
-import GoogleSiteVerification from './components/Gauge/GoogleSiteVerification';
-
-const formatDate = timestamp => {
-    const formattedDate = new Date(timestamp * 1000);
-    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-
-    return {
-        day: formattedDate.getDate() ?? '',
-        month: months[formattedDate.getMonth()] ?? '',
-        year: formattedDate.getFullYear() ?? ''
-    };
-}
+import GoogleSiteVerification from './components/GoogleSiteVerification';
+import Home from './components/Home';
+import NotFound from './components/NotFound';
+import Footer from './components/Footer';
+import Header from './components/Header';
+import PageTitle from './components/PageTitle';
+import GoogleAnalytics from './components/GoogleAnalytics';
+import GoogleAdSense from './components/GoogleAdSense';
+import GoogleAdSenseHelmet from './components/GoogleAdSenseHelmet';
+import About from './components/About';
+import Terms from './components/Terms';
+import PrivacyPolicy from './components/PrivacyPolicy';
 
 function App() {
-    const location = useLocation();
-    const [state, setState] = useState({
-        fngNow: {},
-        fngHistorical: []
-    });
-
-    useEffect(() => {
-        const fetchFearAndGreed = async () => {
-            try {
-                const { data: { max, historical } } = await getFng();
-
-                setState({ 
-                    fngNow: {
-                        date: formatDate(max?.timestamp),
-                        ...max
-                    },
-                    fngHistorical: (historical || []).map(date => {
-                        return {
-                            date: formatDate(date?.timestamp),
-                            ...date
-                        }
-                    }).sort((a, b) => b.timestamp - a.timestamp)
-                }) 
-            } catch (error) {
-                console.error('ERROR => ', error);
-            }
-        }
-        fetchFearAndGreed();
-    }, []);
-
     return (
         <div className='App'>
+            <PageTitle />
+            <GoogleAnalytics />
             <GoogleSiteVerification />
-            <Helmet>
-                <script async src={process.env.REACT_APP_GOOGLE_ADS_URL} crossorigin="anonymous"></script>
-            </Helmet>
+            <GoogleAdSenseHelmet />
+            <GoogleAdSense 
+                className="adsbygoogle"
+                client="ca-pub-6850093525554389"
+                slot="3353523390"
+                layout=""
+                layoutKey=""
+                format="auto"
+                responsive="true"
+                pageLevelAds={false}
+            />
+            <Header />
             <main className="App-main">
-                <h1>Fear and Greed Index Bitcoin</h1>
-                {state.fngNow?.value_classification ?? 'Not Available Right Now'}
-                <div style={{ width: '50vw' }}>
-                    <Gauge
-                        value={state.fngNow.value ?? 0}
-                    />
-                </div>
-                <p>Last updated: {state.fngNow.date?.month} {state.fngNow.date?.day} {state.fngNow.date?.year}</p>
-                Historical Values:
-                <ul className="historical-values">
-                    {(state.fngHistorical || []).map(data => (
-                        <li key={data.timestamp} className="historical-value">
-                            <p><strong>Date:</strong> {data.date.month} {data.date.day} {data.date.year}</p>
-                            <br/>
-                            <span><strong>Index:</strong> {data.value} - {data.value_classification}</span>
-                        </li>
-                    ))}
-                </ul>
+                <Routes>
+                    <Route exact path="/" element={<Home />} />
+                    <Route exact path="/about" element={<About />} />
+                    <Route exact path="/terms-conditions" element={<Terms />} />
+                    <Route exact path="/privacy-policy" element={<PrivacyPolicy /> } />
+                    <Route path="*" element={<NotFound />}/>
+                </Routes>
             </main>
-
-            <footer>
-                Source: <a href="https://alternative.me">alternative.me</a>
-                <br/>
-                <br/>
-                Each day <a href="https://alternative.me">alternative.me</a> gathers and analyzes emotions and sentiments from multiple sources and toghether it creates the Fear and Greed Index.
-            </footer>
+            <Footer />
         </div>
     );
 }
