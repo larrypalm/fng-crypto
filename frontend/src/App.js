@@ -12,6 +12,9 @@ import PageTitle from './components/PageTitle';
 import GoogleAnalytics from './components/GoogleAnalytics';
 import GoogleAdSense from './components/GoogleAdSense';
 import GoogleAdSenseHelmet from './components/GoogleAdSenseHelmet';
+import About from './components/About';
+import Terms from './components/Terms';
+import PrivacyPolicy from './components/PrivacyPolicy';
 
 function App() {
     return (
@@ -29,14 +32,14 @@ function App() {
                 format="auto"
                 responsive="true"
                 pageLevelAds={false}
-                adTest
             />
             <Header />
             <main className="App-main">
                 <Routes>
                     <Route exact path="/" element={<Home />} />
-                    <Route exact path="/about" element={<Home />} />
-                    <Route exact path="/terms-conditions" element={<Home />} />
+                    <Route exact path="/about" element={<About />} />
+                    <Route exact path="/terms-conditions" element={<Terms />} />
+                    <Route exact path="/privacy-policy" element={<PrivacyPolicy /> } />
                     <Route path="*" element={<NotFound />}/>
                 </Routes>
             </main>

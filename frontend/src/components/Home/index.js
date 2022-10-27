@@ -1,6 +1,7 @@
 import Gauge from '../Gauge';
 import { getFng } from '../../routes/fng'
 import { useEffect, useState } from 'react';
+import GoogleAdSense from '../GoogleAdSense';
 
 const formatCountdown = timestamp => {
     // timestamp
@@ -60,8 +61,9 @@ const Home = () => {
         }
         fetchFearAndGreed();
     }, []);
+    
     return (
-        <>
+        <div>
             <h1>Fear and Greed Index Bitcoin</h1>
             <p>Current index: <span style={{ color: '#f2a900' }}>{state.fngNow?.value_classification ?? 'Not Available Right Now'}</span></p>
             <div style={{ width: '50vw' }}>
@@ -82,7 +84,17 @@ const Home = () => {
                     </li>
                 ))}
             </ul>
-        </>
+            <GoogleAdSense 
+                className="adsbygoogle"
+                client="ca-pub-6850093525554389"
+                slot="4446812866"
+                layout=""
+                layoutKey=""
+                format="auto"
+                responsive="true"
+                pageLevelAds={false}
+            />
+        </div>
     )
 }
 
