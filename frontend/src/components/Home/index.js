@@ -66,7 +66,7 @@ const Home = () => {
         <div>
             <h1>Fear and Greed Index Bitcoin</h1>
             <p>Current index: <span style={{ color: '#f2a900' }}>{state.fngNow?.value_classification ?? 'Not Available Right Now'}</span></p>
-            <div style={{ width: '50vw' }}>
+            <div>
                 <Gauge
                     value={state.fngNow.value ?? 0}
                 />
