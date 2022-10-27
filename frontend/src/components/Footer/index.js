@@ -11,7 +11,7 @@ const Footer = () => {
     return (
         <footer>
             <Box sx={{ display: 'flex' }}>
-                <Container sx={{ p: '0px !important' }}>
+                <Container sx={{ p: '0px !important', maxWidth: 'unset !important' }}>
                     <Grid 
                         container 
                         spacing={5}
