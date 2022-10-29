@@ -84,3 +84,20 @@ footer {
 .footer-li:hover::before {
   transform: scaleX(1);
 }
+
+.text-box {
+  display: block;
+}
+
+.text-box a {
+  color: #fff;
+}
+
+.warning-text-color {
+  color: red;
+}
+
+#home-title {
+  position: relative;
+  margin-bottom: 0;
+}
