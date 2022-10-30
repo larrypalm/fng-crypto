@@ -8,7 +8,6 @@ import Home from './components/Home';
 import NotFound from './components/NotFound';
 import Footer from './components/Footer';
 import Header from './components/Header';
-import PageTitle from './components/PageTitle';
 import GoogleAnalytics from './components/GoogleAnalytics';
 import GoogleAdSense from './components/GoogleAdSense';
 import GoogleAdSenseHelmet from './components/GoogleAdSenseHelmet';
@@ -19,7 +18,6 @@ import PrivacyPolicy from './components/PrivacyPolicy';
 function App() {
     return (
         <div className='App'>
-            <PageTitle />
             <GoogleAnalytics />
             <GoogleSiteVerification />
             <GoogleAdSenseHelmet />
