@@ -17,6 +17,7 @@ const About = () => {
                 }}
             >  
                 <div className="text-box">
+                    <h1>About bitcoinfeargreedindex.com</h1>
                     <h2>Data Sources</h2> 
                     <p>
                         <a href="https://alternative.me">Alternative.me</a> is gathering data from the five following sources. Each data point is valued the same as the day before in order to visualize a meaningful progress in sentiment change of the crypto market.
