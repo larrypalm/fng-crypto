@@ -3,6 +3,7 @@ import { getFng } from '../../routes/fng'
 import { useEffect, useState } from 'react';
 import GoogleAdSense from '../GoogleAdSense';
 import BitCoinLogo from '../../assets/images/bitcoin-btc-logo.svg';
+import HeadMeta from '../seo/HeadMeta';
 
 const formatCountdown = timestamp => {
     // timestamp
@@ -64,55 +65,64 @@ const Home = () => {
     }, []);
     
     return (
-        <div>
-            <div
-                style={{ 
-                    display: 'flex',
-                    position: 'relative',
-                    flexDirection: 'column',
-                    margin: '50px 0'
-                }}
-            >
-                <img 
-                    style={{
-                        width: '50px',
-                        maxWidth: 'fit-content',
-                        margin: '0 auto'
-                    }} 
-                    src={BitCoinLogo} 
-                />
-                <h1 id="home-title">Fear and Greed Index <strong style={{ color: '#f2a900' }}>Bitcoin</strong></h1>
-            </div>
-            <p>Current index: <span style={{ color: '#f2a900' }}>{state.fngNow?.value_classification ?? 'Not Available Right Now'}</span></p>
-            <div>
-                <Gauge
-                    value={state.fngNow.value ?? 0}
-                />
-            </div>
-            <p>Last updated: {state.fngNow.date?.month} {state.fngNow.date?.day} {state.fngNow.date?.year}</p>
-            <p>Next update in: {state?.fngNow.timeUntilUpdate?.hours ?? '0'} {state?.fngNow.timeUntilUpdate?.minutes ?? '0'}</p>
-            <br/>
-            <p>Historical Values:</p>
-            <ul className="historical-values">
-                {(state.fngHistorical || []).map(data => (
-                    <li key={data.timestamp} className="historical-value">
-                        <p><strong>Date:</strong> {data.date.month} {data.date.day} {data.date.year}</p>
-                        <br/>
-                        <span><strong>Index:</strong> {data.value} - {data.value_classification}</span>
-                    </li>
-                ))}
-            </ul>
-            <GoogleAdSense 
-                className="adsbygoogle"
-                client="ca-pub-6850093525554389"
-                slot="4446812866"
-                layout=""
-                layoutKey=""
-                format="auto"
-                responsive="true"
-                pageLevelAds={false}
+        <>
+            <HeadMeta 
+                title="Home"
+                canonical="/"
             />
-        </div>
+            <div>
+                <div
+                    style={{ 
+                        display: 'flex',
+                        position: 'relative',
+                        flexDirection: 'column',
+                        margin: '50px 0'
+                    }}
+                >
+                    <img 
+                        style={{
+                            width: '50px',
+                            maxWidth: 'fit-content',
+                            margin: '0 auto'
+                        }} 
+                        alt="Bitcoin Logo"
+                        width="50"
+                        height="50"
+                        src={BitCoinLogo} 
+                    />
+                    <h1 id="home-title">Fear and Greed Index <strong style={{ color: '#f2a900' }}>Bitcoin</strong></h1>
+                </div>
+                <p>Current index: <span style={{ color: '#f2a900' }}>{state.fngNow?.value_classification ?? 'Not Available Right Now'}</span></p>
+                <div>
+                    <Gauge
+                        value={state.fngNow.value ?? 0}
+                    />
+                </div>
+                <p>Last updated: {state.fngNow.date?.month} {state.fngNow.date?.day} {state.fngNow.date?.year}</p>
+                <p>Next update in: {state?.fngNow.timeUntilUpdate?.hours ?? '0'} {state?.fngNow.timeUntilUpdate?.minutes ?? '0'}</p>
+                <br/>
+                <p>Historical Values:</p>
+                <ul className="historical-values">
+                    {(state.fngHistorical || []).map(data => (
+                        <li key={data.timestamp} className="historical-value">
+                            <p><strong>Date:</strong> {data.date.month} {data.date.day} {data.date.year}</p>
+                            <br/>
+                            <span><strong>Index:</strong> {data.value} - {data.value_classification}</span>
+                        </li>
+                    ))}
+                </ul>
+                <GoogleAdSense 
+                    className="adsbygoogle"
+                    client="ca-pub-6850093525554389"
+                    slot="4446812866"
+                    layout=""
+                    layoutKey=""
+                    format="auto"
+                    responsive="true"
+                    pageLevelAds={false}
+                />
+            </div>
+        </>
     )
 }
 
