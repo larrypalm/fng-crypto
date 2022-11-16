@@ -1,87 +1,64 @@
-import {
-    Box,
-    Grid,
-    Container,
-    Link,
-    List,
-    ListItem
-} from '@mui/material';
+import styled from '@emotion/styled';
+import { Link } from 'react-router-dom';
+
+const FooterComponent = styled('footer')`
+    display: flex;
+    
+    @media (max-width: 600px) {
+        flex-direction: column;
+    }
+`;
+
+const Box = styled('div')``;
+
+const CopyRightBox = styled('div')`
+    width: 50%; 
+    text-align: left;
+
+    @media (max-width: 600px) {
+        width: 100%;
+        margin-bottom: 40px;
+    }
+`;
+
+const LinkComponent = styled(Link)``;
 
 const Footer = () => {
     return (
-        <footer>
-            <Box sx={{ display: 'flex' }}>
-                <Container sx={{ p: '0px !important', maxWidth: 'unset !important' }}>
-                    <Grid 
-                        container 
-                        spacing={5}
-                        sx={{ p: '0px !important', display: 'flex' }}
+        <FooterComponent>
+            <CopyRightBox>
+                <h3 style={{ margin: '0' }}>Copyright© 2022 All Rights Reserved</h3>
+            </CopyRightBox>
+            <Box style={{ width: '50%', textAlign: 'left' }}>
+                <Box style={{ marginBottom: '12px' }}>
+                    <LinkComponent
+                        className="footer-li"
+                        to="/"
+                        color="inherit"
                     >
-                        <Grid 
-                            item 
-                            xs={12} 
-                            sm={6} 
-                            sx={{ display: 'flex' }}
-                        >
-                            <p>Copyright© 2022 All Rights Reserved</p>
-                        </Grid>
-                        <Grid item xs={12} sm={6}>
-                            <List
-                                sx={{ p: '0px !important', m: '0px' }}
-                            >
-                                <ListItem sx={{ p: '0px !important', m: '0 0 12px 0' }}>
-                                    <Box>
-                                        <Link
-                                            className="footer-li" 
-                                            href="/" 
-                                            color="inherit"
-                                            sx={{
-                                                textDecoration: 'none',
-                                                '&:hover': { 
-                                                    color: '#f2a900',
-                                                }
-                                            }}
-                                        >
-                                            Home
-                                        </Link>
-                                    </Box>
-                                </ListItem>
-                                <ListItem sx={{ p: '0px !important', m: '0 0 12px 0' }}>
-                                    <Box>
-                                        <Link
-                                            className="footer-li" 
-                                            href="/terms-conditions" 
-                                            color="inherit"
-                                            sx={{
-                                                textDecoration: 'none',
-                                                '&:hover': { color: '#f2a900' }
-                                            }}
-                                        >
-                                            Terms
-                                        </Link>
-                                    </Box>
-                                </ListItem>
-                                <ListItem sx={{ p: '0px !important', m: '0 0 12px 0' }}>
-                                    <Box>
-                                        <Link
-                                            className="footer-li" 
-                                            href="/privacy-policy" 
-                                            color="inherit"
-                                            sx={{
-                                                textDecoration: 'none',
-                                                '&:hover': { color: '#f2a900' }
-                                            }}
-                                        >
-                                            Privacy Policy
-                                        </Link>
-                                    </Box>
-                                </ListItem>
-                            </List>      
-                        </Grid>
-                    </Grid>
-                </Container>
+                        Home
+                    </LinkComponent>
+                </Box>
+                <Box style={{ marginBottom: '12px' }}>
+                    <LinkComponent
+                        className="footer-li"
+                        to="/terms-conditions"
+                        color="inherit"
+                    >
+                        Terms
+                    </LinkComponent>
+                </Box>
+                <Box>
+                    <LinkComponent
+                        className="footer-li"
+                        to="/privacy-policy"
+                        color="inherit"
+                    >
+                        Privacy Policy
+                    </LinkComponent>
+                </Box>
             </Box>
-        </footer>
+        </FooterComponent>
     )
 }
 
