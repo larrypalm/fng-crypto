@@ -4,6 +4,21 @@ import { useEffect, useState } from 'react';
 import GoogleAdSense from '../GoogleAdSense';
 import BitCoinLogo from '../../assets/images/bitcoin-btc-logo.svg';
 import HeadMeta from '../seo/HeadMeta';
+import styled from '@emotion/styled';
+
+const HistoricalValuesList = styled('ul')`
+    background-color: #fff;
+    border-radius: 6px;
+    box-shadow: inset 0 0 10px #000;
+    color: #4a4a4a;
+    display: block;
+    padding: 1rem;
+    list-style: none;
+
+    @media (max-width: 600px) {
+        margin: 24px 2rem 0 2rem;
+    }
+`;
 
 const formatCountdown = timestamp => {
     // timestamp
@@ -101,8 +116,8 @@ const Home = () => {
                 <p>Last updated: {state.fngNow.date?.month} {state.fngNow.date?.day} {state.fngNow.date?.year}</p>
                 <p>Next update in: {state?.fngNow.timeUntilUpdate?.hours ?? '0'} {state?.fngNow.timeUntilUpdate?.minutes ?? '0'}</p>
                 <br/>
-                <p>Historical Values:</p>
-                <ul className="historical-values">
+                <h3 style={{ margin: '0' }}>Historical Values:</h3>
+                <HistoricalValuesList>
                     {(state.fngHistorical || []).map(data => (
                         <li key={data.timestamp} className="historical-value">
                             <p><strong>Date:</strong> {data.date.month} {data.date.day} {data.date.year}</p>
@@ -110,7 +125,7 @@ const Home = () => {
                             <span><strong>Index:</strong> {data.value} - {data.value_classification}</span>
                         </li>
                     ))}
-                </ul>
+                </HistoricalValuesList>
                 <GoogleAdSense 
                     className="adsbygoogle"
                     client="ca-pub-6850093525554389"
